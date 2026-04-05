@@ -15,23 +15,16 @@
             font-family: 'Courier New', 'Monaco', monospace;
             background: #0a0a0a;
             color: #00d400;
-            padding: 20px;
             line-height: 1.8;
             min-height: 100vh;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #1a1a1a;
-            border: 2px solid #00d400;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
+            background: #1a1a1a;
             border-bottom: 2px solid #00d400;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding: 15px 20px;
             text-align: center;
         }
 
@@ -46,18 +39,31 @@
             color: #00a000;
         }
 
-        .directory {
-            margin: 20px 0;
+        .main-container {
+            display: flex;
+            flex: 1;
+            min-height: calc(100vh - 80px);
         }
 
-        .path {
+        /* LEFT SIDEBAR */
+        .sidebar {
+            width: 300px;
+            background: #1a1a1a;
+            border-right: 2px solid #00d400;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
             color: #00a000;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-size: 0.9em;
+            border-bottom: 1px solid #00a000;
+            padding-bottom: 10px;
         }
 
         .folder-item {
-            padding: 10px 15px;
+            padding: 12px 15px;
             margin: 8px 0;
             border: 1px solid #00d400;
             background: #0a0a0a;
@@ -65,7 +71,8 @@
             transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
+            user-select: none;
         }
 
         .folder-item:hover {
@@ -74,72 +81,92 @@
             font-weight: bold;
         }
 
+        .folder-item.active {
+            background: #00d400;
+            color: #0a0a0a;
+            font-weight: bold;
+            border-color: #00a000;
+        }
+
         .folder-icon {
-            font-size: 1.2em;
-            min-width: 20px;
+            font-size: 1em;
+            min-width: 15px;
         }
 
         .folder-name {
             flex: 1;
+            font-size: 0.95em;
         }
 
-        .folder-info {
-            font-size: 0.8em;
+        /* RIGHT CONTENT PANE */
+        .content-pane {
+            flex: 1;
+            background: #0a0a0a;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .path {
             color: #00a000;
-            opacity: 0.7;
-        }
-
-        .folder-item:hover .folder-info {
-            color: #0a0a0a;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            border-bottom: 1px solid #00a000;
+            padding-bottom: 10px;
         }
 
         .content {
             display: none;
-            padding: 20px;
-            background: #0a0a0a;
-            border-top: 2px solid #00d400;
-            margin-top: 15px;
         }
 
         .content.active {
             display: block;
+            animation: fadeIn 0.3s;
         }
 
-        .back-button {
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            border: 1px solid #00d400;
-            background: #0a0a0a;
-            color: #00d400;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            transition: all 0.2s;
-        }
-
-        .back-button:hover {
-            background: #00d400;
-            color: #0a0a0a;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .description {
             line-height: 1.8;
-            margin: 15px 0;
+            margin: 20px 0;
             font-size: 0.95em;
+            color: #00d400;
         }
 
         .status-badge {
             display: inline-block;
-            margin-top: 10px;
-            padding: 5px 10px;
+            margin-top: 15px;
+            padding: 8px 12px;
             border: 1px solid #00a000;
             color: #00a000;
-            font-size: 0.8em;
+            font-size: 0.85em;
+            background: #1a1a1a;
         }
 
+        .info-row {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #00a000;
+            display: flex;
+            gap: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 10px;
+        }
+
+        .info-label {
+            color: #00d400;
+        }
+
+        /* FOOTER */
         .footer {
+            background: #1a1a1a;
             border-top: 2px solid #00d400;
-            margin-top: 30px;
-            padding-top: 15px;
+            padding: 15px 20px;
             text-align: center;
             font-size: 0.85em;
             color: #00a000;
@@ -156,159 +183,227 @@
             color: #0a0a0a;
         }
 
-        .total-items {
-            color: #00a000;
-            font-size: 0.9em;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #00a000;
+        .welcome {
+            color: #00d400;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #00a000;
+            background: #1a1a1a;
         }
 
-        .command-line {
-            color: #00a000;
-            margin: 10px 0;
-            font-size: 0.9em;
-        }
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                min-height: auto;
+            }
 
-        .blink {
-            animation: blink 1s infinite;
-        }
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px solid #00d400;
+                display: flex;
+                gap: 10px;
+                overflow-x: auto;
+                padding: 10px;
+            }
 
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
-        }
+            .folder-item {
+                margin: 0;
+                flex-shrink: 0;
+            }
 
-        @media (max-width: 600px) {
-            .container {
-                border: 1px solid #00d400;
+            .content-pane {
                 padding: 15px;
             }
 
             .header h1 {
                 font-size: 1em;
             }
+        }
 
-            .folder-item {
-                padding: 8px 10px;
-                font-size: 0.9em;
-            }
+        /* SCROLLBAR STYLING */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00d400;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00a000;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>CODE-O-MATIC</h1>
-            <p>~ project directory ~</p>
-        </div>
+    <!-- HEADER -->
+    <div class="header">
+        <h1>CODE-O-MATIC</h1>
+        <p>~ project directory manager ~</p>
+    </div>
 
-        <div class="directory" id="mainView">
-            <div class="path">C:\projects\code-o-matic></div>
+    <!-- MAIN CONTAINER -->
+    <div class="main-container">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-title">[ FOLDERS ]</div>
 
-            <div class="folder-item" onclick="openFolder('acontent')">
+            <div class="folder-item active" onclick="showContent('welcome')">
+                <div class="folder-icon">[*]</div>
+                <div class="folder-name">HOME</div>
+            </div>
+
+            <div class="folder-item" onclick="showContent('acontent')">
                 <div class="folder-icon">[+]</div>
                 <div class="folder-name">ACONTENT</div>
-                <div class="folder-info">FOLDER</div>
             </div>
 
-            <div class="folder-item" onclick="openFolder('smb')">
+            <div class="folder-item" onclick="showContent('smb')">
                 <div class="folder-icon">[+]</div>
                 <div class="folder-name">SOCIAL-MEDIA-BOT</div>
-                <div class="folder-info">FOLDER</div>
             </div>
 
-            <div class="folder-item" onclick="openFolder('web')">
+            <div class="folder-item" onclick="showContent('web')">
                 <div class="folder-icon">[+]</div>
                 <div class="folder-name">WEB-PLATFORM</div>
-                <div class="folder-info">FOLDER</div>
             </div>
+        </div>
 
-            <div class="total-items">
-3 folders, 0 files
-            </div>
+        <!-- CONTENT PANE -->
+        <div class="content-pane">
+            <!-- WELCOME -->
+            <div id="welcome" class="content active">
+                <div class="path">C:\projects\code-o-matic></div>
 
-            <div class="footer">
-                <div class="command-line">code-o-matic.ai <span class="blink">|</span></div>
-                <div style="margin-top: 15px;">
-                    <a href="https://github.com/loverman-B">github</a> |
-                    <a href="mailto:b.m.belskis@gmail.com">email</a>
+                <div class="welcome">
+                    Welcome to Code-O-Matic
+                </div>
+
+                <div class="description">
+                    Select a folder from the left menu to explore our projects.
+                    <br><br>
+                    Code-O-Matic is a collection of innovative projects designed
+                    for performance, security, and scalability. Each project is
+                    maintained in a private repository with controlled access.
+                </div>
+
+                <div style="margin-top: 30px; font-size: 0.9em; color: #00a000;">
+                    [3 folders available]
                 </div>
             </div>
-        </div>
 
-        <!-- ACONTENT -->
-        <div class="content" id="acontent">
-            <button class="back-button" onclick="backToMain()">[back]</button>
-            <div class="path">C:\projects\code-o-matic\ACONTENT></div>
+            <!-- ACONTENT -->
+            <div id="acontent" class="content">
+                <div class="path">C:\projects\code-o-matic\ACONTENT></div>
 
-            <div class="description">
-                <strong>ACONTENT</strong><br>
-                Advanced content management and automation system.
-                <br><br>
-                Streamline your workflow with intelligent content handling,
-                automation tools, and productivity enhancements designed for
-                modern creators and teams.
+                <div class="description">
+                    <strong>ACONTENT</strong><br>
+                    Advanced content management and automation system.
+                    <br><br>
+                    Streamline your workflow with intelligent content handling,
+                    automation tools, and productivity enhancements designed for
+                    modern creators and teams.
+                </div>
+
+                <div class="status-badge">🔒 PRIVATE REPOSITORY</div>
+
+                <div class="info-row">
+                    <div class="info-item">
+                        <span class="info-label">Status:</span>
+                        <span>Active</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Access:</span>
+                        <span>Authorized Users</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="status-badge">🔒 PRIVATE REPOSITORY</div>
-            <div style="margin-top: 20px; font-size: 0.9em; color: #00a000;">
-                Status: Active | Access: Authorized Users Only
-            </div>
-        </div>
+            <!-- SOCIAL MEDIA BOT -->
+            <div id="smb" class="content">
+                <div class="path">C:\projects\code-o-matic\SOCIAL-MEDIA-BOT></div>
 
-        <!-- SOCIAL MEDIA BOT -->
-        <div class="content" id="smb">
-            <button class="back-button" onclick="backToMain()">[back]</button>
-            <div class="path">C:\projects\code-o-matic\SOCIAL-MEDIA-BOT></div>
+                <div class="description">
+                    <strong>SOCIAL-MEDIA-BOT</strong><br>
+                    Intelligent automation for social media management.
+                    <br><br>
+                    Handle content scheduling, analytics tracking, and multi-platform
+                    coordination. Automated workflows for maximum efficiency across
+                    all your social channels.
+                </div>
 
-            <div class="description">
-                <strong>SOCIAL-MEDIA-BOT</strong><br>
-                Intelligent automation for social media management.
-                <br><br>
-                Handle content scheduling, analytics tracking, and multi-platform
-                coordination. Automated workflows for maximum efficiency across
-                all your social channels.
-            </div>
+                <div class="status-badge">🔒 PRIVATE REPOSITORY</div>
 
-            <div class="status-badge">🔒 PRIVATE REPOSITORY</div>
-            <div style="margin-top: 20px; font-size: 0.9em; color: #00a000;">
-                Status: Active | Access: Authorized Users Only
-            </div>
-        </div>
-
-        <!-- WEB PLATFORM -->
-        <div class="content" id="web">
-            <button class="back-button" onclick="backToMain()">[back]</button>
-            <div class="path">C:\projects\code-o-matic\WEB-PLATFORM></div>
-
-            <div class="description">
-                <strong>WEB-PLATFORM</strong><br>
-                Modern web application and infrastructure.
-                <br><br>
-                The foundation of the Code-O-Matic ecosystem. Built with
-                cutting-edge technologies and best practices for performance,
-                reliability, and scalability.
+                <div class="info-row">
+                    <div class="info-item">
+                        <span class="info-label">Status:</span>
+                        <span>Active</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Access:</span>
+                        <span>Authorized Users</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="status-badge">🟢 PUBLIC</div>
-            <div style="margin-top: 20px; font-size: 0.9em; color: #00a000;">
-                Status: Active | Access: Public
+            <!-- WEB PLATFORM -->
+            <div id="web" class="content">
+                <div class="path">C:\projects\code-o-matic\WEB-PLATFORM></div>
+
+                <div class="description">
+                    <strong>WEB-PLATFORM</strong><br>
+                    Modern web application and infrastructure.
+                    <br><br>
+                    The foundation of the Code-O-Matic ecosystem. Built with
+                    cutting-edge technologies and best practices for performance,
+                    reliability, and scalability.
+                </div>
+
+                <div class="status-badge">🟢 PUBLIC</div>
+
+                <div class="info-row">
+                    <div class="info-item">
+                        <span class="info-label">Status:</span>
+                        <span>Active</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Access:</span>
+                        <span>Public</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        function openFolder(folder) {
-            document.getElementById('mainView').style.display = 'none';
-            document.getElementById(folder).classList.add('active');
-        }
+    <!-- FOOTER -->
+    <div class="footer">
+        <a href="https://github.com/loverman-B">github</a> |
+        <a href="mailto:b.m.belskis@gmail.com">email</a>
+    </div>
 
-        function backToMain() {
-            document.getElementById('mainView').style.display = 'block';
+    <script>
+        function showContent(id) {
+            // Hide all content
             document.querySelectorAll('.content').forEach(el => {
                 el.classList.remove('active');
             });
+
+            // Remove active class from all folder items
+            document.querySelectorAll('.folder-item').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Show selected content
+            document.getElementById(id).classList.add('active');
+
+            // Add active class to clicked folder
+            event.target.closest('.folder-item').classList.add('active');
         }
     </script>
 </body>
