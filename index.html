@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code-O-Matic | Innovative Projects</title>
+    <title>Code-O-Matic | Projects</title>
     <style>
         * {
             margin: 0;
@@ -11,485 +11,305 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
-            --accent: #ec4899;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --border: #e2e8f0;
-            --text: #1e293b;
-            --text-light: #64748b;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            background: linear-gradient(135deg, var(--light) 0%, #f1f5f9 100%);
-            color: var(--text);
-            line-height: 1.6;
+            font-family: 'Courier New', 'Monaco', monospace;
+            background: #0a0a0a;
+            color: #00d400;
+            padding: 20px;
+            line-height: 1.8;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.8);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            padding: 1rem 2rem;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5em;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            margin-left: 2rem;
-            transition: color 0.3s;
-            font-size: 0.95em;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 80px;
-            padding: 100px 2rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 8s ease infinite;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
+        .container {
             max-width: 800px;
             margin: 0 auto;
+            background: #1a1a1a;
+            border: 2px solid #00d400;
+            padding: 20px;
         }
 
-        .hero h1 {
-            font-size: 4em;
-            margin-bottom: 1rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .hero p {
-            font-size: 1.3em;
-            opacity: 0.95;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 12px 30px;
-            background: white;
-            color: var(--primary);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Projects Section */
-        .projects-section {
-            padding: 80px 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5em;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-title p {
-            font-size: 1.1em;
-            color: var(--text-light);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-            border-color: var(--primary);
-        }
-
-        .project-icon {
-            font-size: 2.5em;
-            margin-bottom: 1rem;
-        }
-
-        .project-card h3 {
-            font-size: 1.5em;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-
-        .project-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            font-size: 0.95em;
-        }
-
-        .project-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            border: 1px solid var(--primary);
-            border-radius: 50px;
-            font-size: 0.85em;
-            color: var(--primary);
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .project-card:hover .project-badge {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Features Section */
-        .features-section {
-            padding: 80px 2rem;
-            background: white;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-top: 50px;
-        }
-
-        .feature-item {
+        .header {
+            border-bottom: 2px solid #00d400;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
-        .feature-icon {
-            font-size: 3em;
-            margin-bottom: 1rem;
-        }
-
-        .feature-item h4 {
+        .header h1 {
             font-size: 1.2em;
-            margin-bottom: 0.5rem;
-            color: var(--text);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
         }
 
-        .feature-item p {
-            color: var(--text-light);
-            font-size: 0.95em;
+        .header p {
+            font-size: 0.9em;
+            color: #00a000;
         }
 
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 2rem 30px;
-            text-align: center;
+        .directory {
+            margin: 20px 0;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            margin-bottom: 40px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 30px;
-            color: rgba(255,255,255,0.5);
+        .path {
+            color: #00a000;
+            margin-bottom: 10px;
             font-size: 0.9em;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5em;
-            }
-
-            .hero p {
-                font-size: 1.1em;
-            }
-
-            .section-title h2 {
-                font-size: 1.8em;
-            }
-
-            nav {
-                padding: 1rem;
-            }
-
-            nav a {
-                margin-left: 1rem;
-                font-size: 0.85em;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 15px;
-            }
+        .folder-item {
+            padding: 10px 15px;
+            margin: 8px 0;
+            border: 1px solid #00d400;
+            background: #0a0a0a;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        /* Scroll Animation */
-        .fade-in {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
+        .folder-item:hover {
+            background: #00d400;
+            color: #0a0a0a;
+            font-weight: bold;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        .folder-icon {
+            font-size: 1.2em;
+            min-width: 20px;
+        }
+
+        .folder-name {
+            flex: 1;
+        }
+
+        .folder-info {
+            font-size: 0.8em;
+            color: #00a000;
+            opacity: 0.7;
+        }
+
+        .folder-item:hover .folder-info {
+            color: #0a0a0a;
+        }
+
+        .content {
+            display: none;
+            padding: 20px;
+            background: #0a0a0a;
+            border-top: 2px solid #00d400;
+            margin-top: 15px;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .back-button {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #00d400;
+            background: #0a0a0a;
+            color: #00d400;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.2s;
+        }
+
+        .back-button:hover {
+            background: #00d400;
+            color: #0a0a0a;
+        }
+
+        .description {
+            line-height: 1.8;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .status-badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: 1px solid #00a000;
+            color: #00a000;
+            font-size: 0.8em;
+        }
+
+        .footer {
+            border-top: 2px solid #00d400;
+            margin-top: 30px;
+            padding-top: 15px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #00a000;
+        }
+
+        .footer a {
+            color: #00d400;
+            text-decoration: none;
+            border-bottom: 1px dotted #00d400;
+        }
+
+        .footer a:hover {
+            background: #00d400;
+            color: #0a0a0a;
+        }
+
+        .total-items {
+            color: #00a000;
+            font-size: 0.9em;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #00a000;
+        }
+
+        .command-line {
+            color: #00a000;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                border: 1px solid #00d400;
+                padding: 15px;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .header h1 {
+                font-size: 1em;
+            }
+
+            .folder-item {
+                padding: 8px 10px;
+                font-size: 0.9em;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">Code-O-Matic</div>
-            <div>
-                <a href="#projects">Projects</a>
-                <a href="#features">Features</a>
-            </div>
+    <div class="container">
+        <div class="header">
+            <h1>CODE-O-MATIC</h1>
+            <p>~ project directory ~</p>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Code-O-Matic</h1>
-            <p>Innovative solutions for modern development</p>
-            <a href="#projects" class="cta-button">Explore Projects</a>
-        </div>
-    </section>
+        <div class="directory" id="mainView">
+            <div class="path">C:\projects\code-o-matic></div>
 
-    <!-- Projects Section -->
-    <section class="projects-section" id="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Projects</h2>
-                <p>A carefully curated collection of powerful tools and platforms</p>
+            <div class="folder-item" onclick="openFolder('acontent')">
+                <div class="folder-icon">[+]</div>
+                <div class="folder-name">ACONTENT</div>
+                <div class="folder-info">FOLDER</div>
             </div>
 
-            <div class="projects-grid">
-                <div class="project-card fade-in">
-                    <div class="project-icon">📝</div>
-                    <h3>ACONTENT</h3>
-                    <p>Advanced content management and automation system. Streamline your workflow and enhance productivity with intelligent tools designed for modern content creators.</p>
-                    <span class="project-badge">🔒 Private Repository</span>
-                </div>
+            <div class="folder-item" onclick="openFolder('smb')">
+                <div class="folder-icon">[+]</div>
+                <div class="folder-name">SOCIAL-MEDIA-BOT</div>
+                <div class="folder-info">FOLDER</div>
+            </div>
 
-                <div class="project-card fade-in">
-                    <div class="project-icon">🤖</div>
-                    <h3>Social Media Bot</h3>
-                    <p>Intelligent automation for social media management. Handle content scheduling, analytics tracking, and multi-platform coordination with ease and precision.</p>
-                    <span class="project-badge">🔒 Private Repository</span>
-                </div>
+            <div class="folder-item" onclick="openFolder('web')">
+                <div class="folder-icon">[+]</div>
+                <div class="folder-name">WEB-PLATFORM</div>
+                <div class="folder-info">FOLDER</div>
+            </div>
 
-                <div class="project-card fade-in">
-                    <div class="project-icon">🌐</div>
-                    <h3>Web Platform</h3>
-                    <p>Modern web application and infrastructure. The foundation of the Code-O-Matic ecosystem, built with cutting-edge technologies and best practices.</p>
-                    <span class="project-badge">🔒 Private Repository</span>
+            <div class="total-items">
+3 folders, 0 files
+            </div>
+
+            <div class="footer">
+                <div class="command-line">code-o-matic.ai <span class="blink">|</span></div>
+                <div style="margin-top: 15px;">
+                    <a href="https://github.com/loverman-B">github</a> |
+                    <a href="mailto:b.m.belskis@gmail.com">email</a>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="features-section" id="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Code-O-Matic</h2>
-                <p>Built with precision, designed for excellence</p>
+        <!-- ACONTENT -->
+        <div class="content" id="acontent">
+            <button class="back-button" onclick="backToMain()">[back]</button>
+            <div class="path">C:\projects\code-o-matic\ACONTENT></div>
+
+            <div class="description">
+                <strong>ACONTENT</strong><br>
+                Advanced content management and automation system.
+                <br><br>
+                Streamline your workflow with intelligent content handling,
+                automation tools, and productivity enhancements designed for
+                modern creators and teams.
             </div>
 
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">⚡</div>
-                    <h4>Performance</h4>
-                    <p>Lightning-fast execution and optimized workflows</p>
-                </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">🔐</div>
-                    <h4>Security</h4>
-                    <p>Enterprise-grade security and access controls</p>
-                </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">🎯</div>
-                    <h4>Precision</h4>
-                    <p>Engineered for accuracy and reliability</p>
-                </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">🔄</div>
-                    <h4>Scalability</h4>
-                    <p>Grows with your needs, no limits</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <h3 style="font-size: 1.5em; margin-bottom: 1rem;">Code-O-Matic</h3>
-            <p style="margin-bottom: 2rem; color: rgba(255,255,255,0.7);">Crafted with precision for the future</p>
-
-            <div class="footer-links">
-                <a href="https://github.com/loverman-B">GitHub</a>
-                <a href="mailto:b.m.belskis@gmail.com">Contact</a>
+            <div class="status-badge">🔒 PRIVATE REPOSITORY</div>
+            <div style="margin-top: 20px; font-size: 0.9em; color: #00a000;">
+                Status: Active | Access: Authorized Users Only
             </div>
         </div>
 
-        <div class="footer-bottom">
-            <p>&copy; 2026 Code-O-Matic. All projects are private repositories.<br>Access granted to authorized users and collaborators only.</p>
+        <!-- SOCIAL MEDIA BOT -->
+        <div class="content" id="smb">
+            <button class="back-button" onclick="backToMain()">[back]</button>
+            <div class="path">C:\projects\code-o-matic\SOCIAL-MEDIA-BOT></div>
+
+            <div class="description">
+                <strong>SOCIAL-MEDIA-BOT</strong><br>
+                Intelligent automation for social media management.
+                <br><br>
+                Handle content scheduling, analytics tracking, and multi-platform
+                coordination. Automated workflows for maximum efficiency across
+                all your social channels.
+            </div>
+
+            <div class="status-badge">🔒 PRIVATE REPOSITORY</div>
+            <div style="margin-top: 20px; font-size: 0.9em; color: #00a000;">
+                Status: Active | Access: Authorized Users Only
+            </div>
         </div>
-    </footer>
+
+        <!-- WEB PLATFORM -->
+        <div class="content" id="web">
+            <button class="back-button" onclick="backToMain()">[back]</button>
+            <div class="path">C:\projects\code-o-matic\WEB-PLATFORM></div>
+
+            <div class="description">
+                <strong>WEB-PLATFORM</strong><br>
+                Modern web application and infrastructure.
+                <br><br>
+                The foundation of the Code-O-Matic ecosystem. Built with
+                cutting-edge technologies and best practices for performance,
+                reliability, and scalability.
+            </div>
+
+            <div class="status-badge">🟢 PUBLIC</div>
+            <div style="margin-top: 20px; font-size: 0.9em; color: #00a000;">
+                Status: Active | Access: Public
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Intersection Observer for fade-in animation
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                }
-            });
-        });
+        function openFolder(folder) {
+            document.getElementById('mainView').style.display = 'none';
+            document.getElementById(folder).classList.add('active');
+        }
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+        function backToMain() {
+            document.getElementById('mainView').style.display = 'block';
+            document.querySelectorAll('.content').forEach(el => {
+                el.classList.remove('active');
+            });
+        }
     </script>
 </body>
 </html>
