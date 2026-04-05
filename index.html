@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code-O-Matic | Projects</title>
+    <title>Code-O-Matic - GitHub Style</title>
     <style>
         * {
             margin: 0;
@@ -11,399 +11,603 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #79c0ff;
+        }
+
         body {
-            font-family: 'Courier New', 'Monaco', monospace;
-            background: #0a0a0a;
-            color: #00d400;
-            line-height: 1.8;
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .header {
-            background: #1a1a1a;
-            border-bottom: 2px solid #00d400;
-            padding: 15px 20px;
-            text-align: center;
+        .logo {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .header h1 {
-            font-size: 1.2em;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--bg-primary);
+            font-size: 0.8em;
         }
 
-        .header p {
+        .nav-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
             font-size: 0.9em;
-            color: #00a000;
+            transition: color 0.2s;
         }
 
-        .main-container {
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
             display: flex;
-            flex: 1;
-            min-height: calc(100vh - 80px);
+            gap: 20px;
+            padding: 20px;
         }
 
-        /* LEFT SIDEBAR */
+        /* SIDEBAR */
         .sidebar {
-            width: 300px;
-            background: #1a1a1a;
-            border-right: 2px solid #00d400;
-            padding: 20px;
-            overflow-y: auto;
+            width: 260px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
         }
 
         .sidebar-title {
-            color: #00a000;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-            border-bottom: 1px solid #00a000;
-            padding-bottom: 10px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            padding: 0 8px;
         }
 
-        .folder-item {
-            padding: 12px 15px;
-            margin: 8px 0;
-            border: 1px solid #00d400;
-            background: #0a0a0a;
+        .repo-item {
+            padding: 8px 12px;
+            margin: 4px 0;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s;
+            border: 1px solid transparent;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
-            user-select: none;
+            gap: 8px;
         }
 
-        .folder-item:hover {
-            background: #00d400;
-            color: #0a0a0a;
-            font-weight: bold;
+        .repo-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--accent);
         }
 
-        .folder-item.active {
-            background: #00d400;
-            color: #0a0a0a;
-            font-weight: bold;
-            border-color: #00a000;
+        .repo-item.active {
+            background: var(--bg-tertiary);
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
-        .folder-icon {
-            font-size: 1em;
-            min-width: 15px;
+        .repo-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
         }
 
-        .folder-name {
-            flex: 1;
-            font-size: 0.95em;
-        }
-
-        /* RIGHT CONTENT PANE */
-        .content-pane {
-            flex: 1;
-            background: #0a0a0a;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .path {
-            color: #00a000;
-            margin-bottom: 20px;
-            font-size: 0.9em;
-            border-bottom: 1px solid #00a000;
-            padding-bottom: 10px;
-        }
-
+        /* MAIN CONTENT */
         .content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .repo-view {
             display: none;
         }
 
-        .content.active {
+        .repo-view.active {
             display: block;
-            animation: fadeIn 0.3s;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .repo-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
         }
 
-        .description {
-            line-height: 1.8;
-            margin: 20px 0;
+        .repo-title {
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .repo-icon-lg {
+            width: 28px;
+            height: 28px;
+            font-size: 1.2em;
+        }
+
+        .repo-description {
+            color: var(--text-secondary);
             font-size: 0.95em;
-            color: #00d400;
+            line-height: 1.8;
         }
 
-        .status-badge {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 12px;
-            border: 1px solid #00a000;
-            color: #00a000;
+        .repo-meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 12px;
             font-size: 0.85em;
-            background: #1a1a1a;
+            color: var(--text-secondary);
         }
 
-        .info-row {
-            margin-top: 20px;
+        .repo-detail {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* CONTENT SECTION */
+        .section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            font-size: 0.85em;
+            margin-top: 12px;
+            color: var(--text-secondary);
+        }
+
+        .badge.private {
+            border-color: #da3633;
+            color: #f85149;
+            background: rgba(218, 54, 51, 0.1);
+        }
+
+        .badge.public {
+            border-color: #1f6feb;
+            color: #58a6ff;
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        /* TAB NAVIGATION */
+        .repo-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 16px;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            color: var(--text-secondary);
             font-size: 0.9em;
-            color: #00a000;
-            display: flex;
-            gap: 30px;
+            transition: all 0.2s;
+            text-decoration: none;
         }
 
-        .info-item {
-            display: flex;
-            gap: 10px;
+        .tab:hover {
+            color: var(--text-primary);
+            border-bottom-color: var(--border);
         }
 
-        .info-label {
-            color: #00d400;
+        .tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
         }
 
         /* FOOTER */
-        .footer {
-            background: #1a1a1a;
-            border-top: 2px solid #00d400;
-            padding: 15px 20px;
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 20px;
             text-align: center;
             font-size: 0.85em;
-            color: #00a000;
+            color: var(--text-secondary);
+            margin-top: 40px;
         }
 
-        .footer a {
-            color: #00d400;
+        .footer-links {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--accent);
             text-decoration: none;
-            border-bottom: 1px dotted #00d400;
+            margin: 0 12px;
         }
 
-        .footer a:hover {
-            background: #00d400;
-            color: #0a0a0a;
-        }
-
-        .welcome {
-            color: #00d400;
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #00a000;
-            background: #1a1a1a;
+        .footer-links a:hover {
+            text-decoration: underline;
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .main-container {
+            .container {
                 flex-direction: column;
-                min-height: auto;
+                padding: 12px;
             }
 
             .sidebar {
                 width: 100%;
-                border-right: none;
-                border-bottom: 2px solid #00d400;
                 display: flex;
-                gap: 10px;
+                gap: 20px;
                 overflow-x: auto;
-                padding: 10px;
+                margin-bottom: 20px;
             }
 
-            .folder-item {
-                margin: 0;
+            .sidebar-section {
+                margin-bottom: 0;
                 flex-shrink: 0;
             }
 
-            .content-pane {
-                padding: 15px;
+            .repo-title {
+                font-size: 1.5em;
             }
 
-            .header h1 {
-                font-size: 1em;
+            .header-container {
+                flex-direction: column;
+                gap: 12px;
             }
-        }
 
-        /* SCROLLBAR STYLING */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #00d400;
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00a000;
+            .nav-right {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <!-- HEADER -->
-    <div class="header">
-        <h1>CODE-O-MATIC</h1>
-        <p>~ project directory manager ~</p>
-    </div>
-
-    <!-- MAIN CONTAINER -->
-    <div class="main-container">
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <div class="sidebar-title">[ FOLDERS ]</div>
-
-            <div class="folder-item active" onclick="showContent('welcome')">
-                <div class="folder-icon">[*]</div>
-                <div class="folder-name">HOME</div>
-            </div>
-
-            <div class="folder-item" onclick="showContent('acontent')">
-                <div class="folder-icon">[+]</div>
-                <div class="folder-name">ACONTENT</div>
-            </div>
-
-            <div class="folder-item" onclick="showContent('smb')">
-                <div class="folder-icon">[+]</div>
-                <div class="folder-name">SOCIAL-MEDIA-BOT</div>
-            </div>
-
-            <div class="folder-item" onclick="showContent('web')">
-                <div class="folder-icon">[+]</div>
-                <div class="folder-name">WEB-PLATFORM</div>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo" onclick="showRepo('home')">
+                <div class="logo-icon">C</div>
+                <span>Code-O-Matic</span>
+            </a>
+            <div class="nav-right">
+                <a href="https://github.com/loverman-B" class="nav-link">GitHub</a>
+                <a href="mailto:b.m.belskis@gmail.com" class="nav-link">Contact</a>
             </div>
         </div>
+    </header>
 
-        <!-- CONTENT PANE -->
-        <div class="content-pane">
-            <!-- WELCOME -->
-            <div id="welcome" class="content active">
-                <div class="path">C:\projects\code-o-matic></div>
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">📁 Projects</div>
 
-                <div class="welcome">
-                    Welcome to Code-O-Matic
+                <a href="#" class="repo-item active" onclick="showRepo('home'); return false;">
+                    <span class="repo-icon">📍</span>
+                    <span>Home</span>
+                </a>
+
+                <a href="#" class="repo-item" onclick="showRepo('acontent'); return false;">
+                    <span class="repo-icon">🔒</span>
+                    <span>ACONTENT</span>
+                </a>
+
+                <a href="#" class="repo-item" onclick="showRepo('smb'); return false;">
+                    <span class="repo-icon">🔒</span>
+                    <span>SOCIAL-MEDIA-BOT</span>
+                </a>
+
+                <a href="#" class="repo-item" onclick="showRepo('web'); return false;">
+                    <span class="repo-icon">🌐</span>
+                    <span>WEB-PLATFORM</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="content">
+            <!-- HOME -->
+            <div id="home" class="repo-view active">
+                <div class="repo-header">
+                    <div class="repo-title">
+                        <span>Code-O-Matic</span>
+                    </div>
+                    <div class="repo-description">
+                        A collection of innovative projects. Select a project from the sidebar to explore.
+                    </div>
                 </div>
 
-                <div class="description">
-                    Select a folder from the left menu to explore our projects.
-                    <br><br>
-                    Code-O-Matic is a collection of innovative projects designed
-                    for performance, security, and scalability. Each project is
-                    maintained in a private repository with controlled access.
+                <div class="section">
+                    <div class="section-title">📊 Overview</div>
+                    <div class="section-content">
+                        <p>
+                            Code-O-Matic houses three core projects, each designed for specific purposes:
+                        </p>
+                        <ul style="margin-left: 20px; margin-top: 12px;">
+                            <li><strong>ACONTENT</strong> - Advanced content management</li>
+                            <li><strong>SOCIAL-MEDIA-BOT</strong> - Social automation platform</li>
+                            <li><strong>WEB-PLATFORM</strong> - Modern web infrastructure</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div style="margin-top: 30px; font-size: 0.9em; color: #00a000;">
-                    [3 folders available]
+                <div class="section">
+                    <div class="section-title">🔐 Access</div>
+                    <div class="section-content">
+                        All projects are maintained with controlled access. Only authorized users have repository access.
+                    </div>
                 </div>
             </div>
 
             <!-- ACONTENT -->
-            <div id="acontent" class="content">
-                <div class="path">C:\projects\code-o-matic\ACONTENT></div>
-
-                <div class="description">
-                    <strong>ACONTENT</strong><br>
-                    Advanced content management and automation system.
-                    <br><br>
-                    Streamline your workflow with intelligent content handling,
-                    automation tools, and productivity enhancements designed for
-                    modern creators and teams.
+            <div id="acontent" class="repo-view">
+                <div class="repo-header">
+                    <div class="repo-title">
+                        <span class="repo-icon-lg">📝</span>
+                        <span>ACONTENT</span>
+                    </div>
+                    <div class="repo-description">
+                        Advanced content management and automation system for modern creators.
+                    </div>
+                    <div class="repo-meta">
+                        <span class="repo-detail">
+                            <span>Status:</span>
+                            <span>Active</span>
+                        </span>
+                        <span class="repo-detail">
+                            <span>Type:</span>
+                            <span>Private Repository</span>
+                        </span>
+                    </div>
+                    <div class="badge private">🔒 Private</div>
                 </div>
 
-                <div class="status-badge">🔒 PRIVATE REPOSITORY</div>
+                <div class="repo-tabs">
+                    <div class="tab active">About</div>
+                </div>
 
-                <div class="info-row">
-                    <div class="info-item">
-                        <span class="info-label">Status:</span>
-                        <span>Active</span>
+                <div class="section">
+                    <div class="section-title">📋 Description</div>
+                    <div class="section-content">
+                        <p>
+                            Streamline your workflow with intelligent content handling, automation tools,
+                            and productivity enhancements designed for modern creators and teams.
+                        </p>
+                        <p style="margin-top: 12px;">
+                            Features include:
+                        </p>
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>Content automation workflows</li>
+                            <li>Team collaboration tools</li>
+                            <li>Advanced scheduling</li>
+                            <li>Analytics and insights</li>
+                        </ul>
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Access:</span>
-                        <span>Authorized Users</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">👥 Access</div>
+                    <div class="section-content">
+                        Authorized users and collaborators only.
                     </div>
                 </div>
             </div>
 
             <!-- SOCIAL MEDIA BOT -->
-            <div id="smb" class="content">
-                <div class="path">C:\projects\code-o-matic\SOCIAL-MEDIA-BOT></div>
-
-                <div class="description">
-                    <strong>SOCIAL-MEDIA-BOT</strong><br>
-                    Intelligent automation for social media management.
-                    <br><br>
-                    Handle content scheduling, analytics tracking, and multi-platform
-                    coordination. Automated workflows for maximum efficiency across
-                    all your social channels.
+            <div id="smb" class="repo-view">
+                <div class="repo-header">
+                    <div class="repo-title">
+                        <span class="repo-icon-lg">🤖</span>
+                        <span>SOCIAL-MEDIA-BOT</span>
+                    </div>
+                    <div class="repo-description">
+                        Intelligent automation for social media management across all platforms.
+                    </div>
+                    <div class="repo-meta">
+                        <span class="repo-detail">
+                            <span>Status:</span>
+                            <span>Active</span>
+                        </span>
+                        <span class="repo-detail">
+                            <span>Type:</span>
+                            <span>Private Repository</span>
+                        </span>
+                    </div>
+                    <div class="badge private">🔒 Private</div>
                 </div>
 
-                <div class="status-badge">🔒 PRIVATE REPOSITORY</div>
+                <div class="repo-tabs">
+                    <div class="tab active">About</div>
+                </div>
 
-                <div class="info-row">
-                    <div class="info-item">
-                        <span class="info-label">Status:</span>
-                        <span>Active</span>
+                <div class="section">
+                    <div class="section-title">📋 Description</div>
+                    <div class="section-content">
+                        <p>
+                            Handle content scheduling, analytics tracking, and multi-platform coordination.
+                            Automated workflows for maximum efficiency across all your social channels.
+                        </p>
+                        <p style="margin-top: 12px;">
+                            Capabilities:
+                        </p>
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>Multi-platform posting</li>
+                            <li>Content scheduling engine</li>
+                            <li>Performance analytics</li>
+                            <li>Automated responses</li>
+                            <li>Engagement tracking</li>
+                        </ul>
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Access:</span>
-                        <span>Authorized Users</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">👥 Access</div>
+                    <div class="section-content">
+                        Authorized users and collaborators only.
                     </div>
                 </div>
             </div>
 
             <!-- WEB PLATFORM -->
-            <div id="web" class="content">
-                <div class="path">C:\projects\code-o-matic\WEB-PLATFORM></div>
-
-                <div class="description">
-                    <strong>WEB-PLATFORM</strong><br>
-                    Modern web application and infrastructure.
-                    <br><br>
-                    The foundation of the Code-O-Matic ecosystem. Built with
-                    cutting-edge technologies and best practices for performance,
-                    reliability, and scalability.
+            <div id="web" class="repo-view">
+                <div class="repo-header">
+                    <div class="repo-title">
+                        <span class="repo-icon-lg">🌐</span>
+                        <span>WEB-PLATFORM</span>
+                    </div>
+                    <div class="repo-description">
+                        Modern web application and infrastructure for the Code-O-Matic ecosystem.
+                    </div>
+                    <div class="repo-meta">
+                        <span class="repo-detail">
+                            <span>Status:</span>
+                            <span>Active</span>
+                        </span>
+                        <span class="repo-detail">
+                            <span>Type:</span>
+                            <span>Public</span>
+                        </span>
+                    </div>
+                    <div class="badge public">🟢 Public</div>
                 </div>
 
-                <div class="status-badge">🟢 PUBLIC</div>
+                <div class="repo-tabs">
+                    <div class="tab active">About</div>
+                </div>
 
-                <div class="info-row">
-                    <div class="info-item">
-                        <span class="info-label">Status:</span>
-                        <span>Active</span>
+                <div class="section">
+                    <div class="section-title">📋 Description</div>
+                    <div class="section-content">
+                        <p>
+                            The foundation of the Code-O-Matic ecosystem. Built with cutting-edge
+                            technologies and best practices for performance, reliability, and scalability.
+                        </p>
+                        <p style="margin-top: 12px;">
+                            Built with:
+                        </p>
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>Modern web technologies</li>
+                            <li>Responsive design</li>
+                            <li>Performance optimization</li>
+                            <li>Security best practices</li>
+                        </ul>
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Access:</span>
-                        <span>Public</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">👥 Access</div>
+                    <div class="section-content">
+                        Public access for landing page and documentation.
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 
     <!-- FOOTER -->
-    <div class="footer">
-        <a href="https://github.com/loverman-B">github</a> |
-        <a href="mailto:b.m.belskis@gmail.com">email</a>
-    </div>
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/loverman-B">GitHub</a>
+            <a href="mailto:b.m.belskis@gmail.com">Email</a>
+        </div>
+        <div>© 2026 Code-O-Matic. All rights reserved.</div>
+    </footer>
 
     <script>
-        function showContent(id) {
-            // Hide all content
-            document.querySelectorAll('.content').forEach(el => {
+        function showRepo(repoId) {
+            // Hide all repo views
+            document.querySelectorAll('.repo-view').forEach(el => {
                 el.classList.remove('active');
             });
 
-            // Remove active class from all folder items
-            document.querySelectorAll('.folder-item').forEach(el => {
+            // Remove active class from all repo items
+            document.querySelectorAll('.repo-item').forEach(el => {
                 el.classList.remove('active');
             });
 
-            // Show selected content
-            document.getElementById(id).classList.add('active');
+            // Show selected repo
+            document.getElementById(repoId).classList.add('active');
 
-            // Add active class to clicked folder
-            event.target.closest('.folder-item').classList.add('active');
+            // Add active class to clicked item
+            event?.currentTarget?.classList.add('active');
         }
     </script>
 </body>
