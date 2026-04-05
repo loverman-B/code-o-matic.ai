@@ -41,9 +41,9 @@ code-o-matic.ai/ (Private GitHub Repo - This Hub)
 ├── claude.md                    # This documentation
 ├── index.html                   # Simple redirect to GitHub
 └── /templates                   # Reusable automation templates
-    ├── automation-template/
-    ├── email-automation/
-    └── api-integration/
+    ├── base-template/           # Start here - base project structure
+    ├── email-automation/        # Email-related automation tasks
+    └── api-integration/         # API integration tasks
 
 Client Repositories (Separate Private Repos - Per Client)
 ├── automation-client-{name-a}/  # Private, shared with Client A only
@@ -122,10 +122,22 @@ automation-client-{clientname}
 ## Reusable Templates
 
 Located in `/templates` folder:
-- `automation-template/` — Base structure
-- `email-automation/` — Email workflows
-- `api-integration/` — API setup template
-- Add more as you develop solutions
+
+### Available Templates
+- **base-template/** — Start here for new automation projects. Copy and customize this for each client.
+- **email-automation/** — For email-related automation tasks (SMTP setup, email templating, etc.)
+- **api-integration/** — For integrating with external APIs (authentication, rate limiting, error handling)
+
+### Using Templates
+
+1. Copy the appropriate template folder
+2. Rename to your project name: `automation-client-{name}`
+3. Customize for the specific client
+4. Add client-specific code and configurations
+5. Create a new GitHub repository for the client
+6. Push to client repo and add them as collaborator
+
+Add more templates as you develop new types of solutions.
 
 ## File Structure for Client Repos
 
@@ -182,4 +194,19 @@ Update the README.md tracking table with:
 
 **Last Updated:** 2026-04-05
 **Status:** Active & Ready for Clients
-**Version:** 2.0
+**Version:** 2.1
+
+## Quick Start Checklist
+
+Getting ready for your first client?
+
+- [ ] Read this claude.md document
+- [ ] Review the template folders in `/templates`
+- [ ] Check README.md for client tracking
+- [ ] Create a private GitHub repo for the client
+- [ ] Copy a template and customize
+- [ ] Set up security (.env, .gitignore)
+- [ ] Push to client repo
+- [ ] Invite client as collaborator
+- [ ] Send setup instructions
+- [ ] Update tracking table
